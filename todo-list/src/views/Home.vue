@@ -2,15 +2,31 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
 
-    <Form @addTask="insertTask" />
+    <div class="tac">
+      <Form @addTask="insertTask" @refresh="reloadList" />
+      <List :list="taskList" />
+    </div>
 
-    <button @click="reloadList" >Reload</button>
-    
-    <List :list="taskList" />
 
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
+
+<style>
+.tac {
+  text-align: center;
+}
+
+.flex-col, .flex-row {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+</style>
 
 <script>
 import axios from 'axios'
@@ -31,19 +47,16 @@ export default {
   }),
   methods: {
     insertTask: async function(typedText) {
-        console.log("insert",typedText);
         const res = await axios.post('http://localhost:3000/task',{typedText})
-        console.log('add',res)
         this.reloadList()
     },
     async reloadList() {
+      this.taskList = []
       const { data } = await axios.get('http://localhost:3000/task')
       this.taskList = data
-      console.log('res',data)
     }
   },
   async mounted() {
-    console.log('mounted')
     await this.reloadList()  
   }
 };

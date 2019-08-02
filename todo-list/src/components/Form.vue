@@ -1,10 +1,28 @@
 <template>
   <div>
-    <input type="text" id="input" :value="text" @input="setText" @keyup.enter="addTask">
-    <label for="input">Ajouter une task</label>
-    <button @click="addTask">+</button>
+    <div class="flex-row">
+      <label for="input">Ajouter une task</label>
+      <input id="input" :value="text" @input="setText" @keyup.enter="addTask" />
+      <button @click="addTask">+</button>
+    </div>
+    <div class="flex-row">
+      <button @click="reloadList" >Reload</button>
+    </div>
   </div>
 </template>
+
+<style>
+.flex-col, .flex-row {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+</style>
+
 
 <script>
 export default {
@@ -17,8 +35,11 @@ export default {
       this.text = e.target.value;
     },
     addTask: function() {
-      console.log(this.text)
       this.$emit('addTask',this.text);
+      this.text = ''
+    },
+    reloadList: function() {
+      this.$emit('refresh',{})
     }
   }
 };
