@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="flex-row">
-      <md-button class="md-raised md-accent md-icon-button" @click="reloadList"><md-icon>refresh</md-icon></md-button>
       <md-field>
         <label for="input">Ajouter une tâche</label>
         <md-input name="input" id="input" :value="text" @input="setText" @keyup.enter="addTask"  />
       </md-field>
       <md-button class="md-raised md-primary" @click="addTask">Add</md-button>
+      <md-button class="md-raised md-accent md-icon-button" @click="reloadList"><md-icon>refresh</md-icon></md-button>
     </div>
     <div class="flex-row">
       
@@ -17,6 +17,7 @@
 <style>
 .flex-col, .flex-row {
   display: flex;
+  padding: 0 8px;
 }
 .flex-col {
   flex-direction: column;

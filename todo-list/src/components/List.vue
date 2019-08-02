@@ -2,15 +2,13 @@
   <md-list>
       <md-list-item class="entry flex-row" v-for="(i, index) of list" :key="index">
         <div class="s8">
-            <md-checkbox>{{i.typedText}}</md-checkbox>
+            <md-checkbox :checked="i.checked" @change="toggleCheck">
+              <span v-if="i.pending" class="name bold">{{i.typedText}}</span> 
+              <span v-else class="name striked">{{i.typedText}}</span> 
+              <span class="small">id:({{i._id}})</span></md-checkbox>
         </div>
         <div class="flex-row">
-          <md-button class="md-icon-button">
-            <md-icon>edit</md-icon>
-          </md-button>
-          <md-button class="md-icon-button">
-            <md-icon>delete</md-icon>
-          </md-button>
+          <button class="md-raised md-accent" @click="deleteEntry" :id="index">delete</button>
         </div>
       </md-list-item>
     </md-list>
@@ -19,6 +17,16 @@
 <style>
 .s8 {
   width: 80%;
+}
+span.bold {
+  font-weight: bolder;
+}
+span.striked {
+  text-decoration: line-through;
+}
+span.small {
+  font-style: italic;
+  font-size: .75em;
 }
 
 ul {
@@ -51,6 +59,16 @@ export default {
   },
   data: () => ({
     litems: []
-  })
+  }),
+  methods: {
+    deleteEntry: function(e) {
+      console.log('emit delete',e.target.id)
+      this.$emit('deleteTask',e.target.id);
+    },
+    toggleCheck: function(e) {
+      console.log('check',e)
+      this.$emit('toggleCheck',e)
+    }
+  }
 };
 </script>

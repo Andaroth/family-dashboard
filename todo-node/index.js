@@ -25,7 +25,7 @@ client.connect((err)=>{
   app.get('/task', (req,res)=>{
     let tasks = db.collection('tasks')
     let obj = tasks.find({}).toArray((err,tasklist)=>{
-      console.log('tasklist',tasklist)
+      console.log('get tasklist')
       res.send(tasklist)
     })
   })
@@ -33,7 +33,23 @@ client.connect((err)=>{
   app.post('/task', (req,res)=>{
     let tasks = db.collection('tasks')
     tasks.insertOne(req.body,()=>{
+      console.log('insert task',req.body)
       res.send()
+    })
+  })
+
+  app.put('/delete', (req,res)=>{
+    let tasks = db.collection('tasks')
+    tasks.deleteOne({_id:req.body._id},()=>{
+      console.log('delete task',req.body)
+      res.send()
+    })
+  })
+  app.put('/edit', (req,res)=>{
+    console.log('put edit task',req.body)
+    let tasks = db.collection('tasks')
+    tasks.replaceOne(({_id:req.body._id},req.body),()=>{
+        res.send()
     })
   })
 
