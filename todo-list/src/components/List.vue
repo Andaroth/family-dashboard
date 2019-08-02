@@ -2,9 +2,9 @@
   <md-list>
       <md-list-item class="entry flex-row" v-for="(i, index) of list" :key="index">
         <div class="s8">
-          <span>{{i.typedText}}</span>
+            <md-checkbox>{{i.typedText}}</md-checkbox>
         </div>
-        <div class="">
+        <div class="flex-row">
           <md-button class="md-icon-button">
             <md-icon>edit</md-icon>
           </md-button>
@@ -27,7 +27,6 @@ ul {
 }
 .entry {
   display: block;
-  border-top: 1px solid rgba(0,0,0,.3);
 }
 
 .flex-col, .flex-row {
@@ -49,6 +48,9 @@ export default {
   name: 'List',
   props: {
     list: {type:Array},
-  }
+  },
+  data: () => ({
+    litems: []
+  })
 };
 </script>

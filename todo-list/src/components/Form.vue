@@ -38,8 +38,10 @@ export default {
       this.text = e;
     },
     addTask: function() {
-      this.$emit('addTask',this.text);
-      this.text = ''
+      if (this.text.length) {
+        this.$emit('addTask',this.text);
+        this.text = ''
+      }
     },
     reloadList: function() {
       this.$emit('refresh',{})
