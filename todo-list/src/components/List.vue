@@ -5,12 +5,12 @@
           <span>{{i.typedText}}</span>
         </div>
         <div class="">
-          <button>
-            Edit
-          </button>
-          <button>
-            Del
-          </button>
+          <md-button class="md-icon-button">
+            <md-icon>edit</md-icon>
+          </md-button>
+          <md-button class="md-icon-button">
+            <md-icon>delete</md-icon>
+          </md-button>
         </div>
       </md-list-item>
     </md-list>

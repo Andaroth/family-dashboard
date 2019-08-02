@@ -1,12 +1,15 @@
 <template>
   <div>
     <div class="flex-row">
-      <label for="input">Ajouter une task</label>
-      <input id="input" :value="text" @input="setText" @keyup.enter="addTask" />
-      <button @click="addTask">+</button>
+      <md-button class="md-raised md-accent md-icon-button" @click="reloadList"><md-icon>refresh</md-icon></md-button>
+      <md-field>
+        <label for="input">Ajouter une tâche</label>
+        <md-input name="input" id="input" :value="text" @input="setText" @keyup.enter="addTask"  />
+      </md-field>
+      <md-button class="md-raised md-primary" @click="addTask">Add</md-button>
     </div>
     <div class="flex-row">
-      <button @click="reloadList" >Reload</button>
+      
     </div>
   </div>
 </template>
@@ -32,7 +35,7 @@ export default {
   }),
   methods: {
     setText: function(e) {
-      this.text = e.target.value;
+      this.text = e;
     },
     addTask: function() {
       this.$emit('addTask',this.text);

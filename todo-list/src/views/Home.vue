@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
 
-    <div class="tac">
+    <div>
       <Form @addTask="insertTask" @refresh="reloadList" />
       <List :list="taskList" />
     </div>
