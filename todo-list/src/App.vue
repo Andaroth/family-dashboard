@@ -11,6 +11,10 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: #DEDEDE;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 #nav {
   padding: 30px;

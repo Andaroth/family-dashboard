@@ -41,7 +41,7 @@ client.connect((err)=>{
   app.put('/delete', (req,res)=>{
     let tasks = db.collection('tasks')
     tasks.deleteOne({_id:req.body._id},()=>{
-      console.log('delete task',req.body)
+      console.log('delete task',req.body._id)
       res.send()
     })
   })

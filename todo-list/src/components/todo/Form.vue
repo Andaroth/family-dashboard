@@ -5,8 +5,7 @@
         <label for="input">Ajouter une tâche</label>
         <md-input name="input" id="input" :value="text" @input="setText" @keyup.enter="addTask"  />
       </md-field>
-      <md-button class="md-raised md-primary" @click="addTask">Add</md-button>
-      <md-button class="md-raised md-accent md-icon-button" @click="reloadList"><md-icon>refresh</md-icon></md-button>
+      <md-button class="md-raised md-primary md-icon-button" @click="addTask">Add</md-button>
     </div>
     <div class="flex-row">
       
