@@ -1,12 +1,10 @@
 <template>
   <div>
     <md-list class="list">
-      <md-list-item class="entry flex-row" v-for="(i, index) of list" :key="index">
-        <div class="li-elem" @click="toggleCheck(i._id)">
-            <md-checkbox :v-model="!i.pending"></md-checkbox>
-            <span v-if="i.pending" class="name">{{i.typedText}}</span> 
-            <span v-else class="name striked">{{i.typedText}}</span> 
-        </div>
+      <md-list-item class="entry flex-row jcfs" v-for="(i, index) of list" :key="index" @click="toggleCheck(i._id)">
+        <md-checkbox :v-model="i.done" :value="!i.done">
+          <span :class="'name striked-'+i.done">{{i.typedText}}</span>
+        </md-checkbox>
         <md-button class="md-raised md-accent md-icon-button" @click="deleteEntry(i._id)">delete</md-button>
       </md-list-item>
     </md-list>
@@ -20,12 +18,6 @@
 }
 .li-elem {
   width: 100%;
-  cursor: pointer;
-  border-radius: 4px;
-  padding: 0 4px;
-}
-.li-elem:hover {
-  background: lightgrey;
 }
 .refresh-btn {
   position: absolute !important;
@@ -35,8 +27,11 @@
 
 .name {
   font-weight: bolder;
+  z-index: 10;
+  width: 100%;
 }
-span.striked {
+.striked-true {
+  font-weight: normal;
   text-decoration: line-through;
   font-weight: normal;
   color: grey;
@@ -52,6 +47,7 @@ ul {
 }
 .entry {
   display: block;
+  cursor: pointer;
 }
 
 .flex-col, .flex-row {

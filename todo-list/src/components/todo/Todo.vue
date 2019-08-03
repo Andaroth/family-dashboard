@@ -58,18 +58,18 @@ export default {
   }),
   methods: {
     insertTask: async function(typedText) {
-        const res = await axios.post(ENDPOINT_TASK,{typedText,pending:true})
+        const res = await axios.post(ENDPOINT_TASK,{typedText,done:false})
         this.reloadList()
     },
     toggleCheck: async function(id) {
       let target = this.taskList.find(task => task._id == id)
-      target.pending = !target.pending
-      console.log('will edit to : ',target)
+      console.log('will edit from ',target.done.toString())
+      target.done = !target.done
+      console.log('to : ',target.done.toString())
       const res = await axios.put(ENDPOINT_EDIT,target)
     },
     delTask: async function(id) {
       const target = this.taskList.find(task => task._id == id)
-      console.log('delTask',target)
       const res = await axios.put(ENDPOINT_DEL,target)
       this.taskList = this.taskList.filter(task=>task._id!=target._id)
     },

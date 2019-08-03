@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 
 var MongoClient = require('mongodb').MongoClient
+ObjectID = require('mongodb').ObjectID;
 var assert = require('assert')
 var mongoUrl = "mongodb://localhost:27017/todo-list"
 
@@ -40,16 +41,18 @@ client.connect((err)=>{
 
   app.put('/delete', (req,res)=>{
     let tasks = db.collection('tasks')
-    tasks.deleteOne({_id:req.body._id},()=>{
+    tasks.deleteOne({_id:new ObjectID(req.body._id)},()=>{
       console.log('delete task',req.body._id)
       res.send()
     })
   })
   app.put('/edit', (req,res)=>{
-    console.log('put edit task',req.body)
     let tasks = db.collection('tasks')
-    tasks.replaceOne(({_id:req.body._id},req.body),()=>{
-        res.send()
+    tasks.deleteOne({_id:new ObjectID(req.body._id)},()=>{
+      tasks.insertOne(req.body,()=>{
+          console.log('edit task',req.body)
+          res.send()
+      })
     })
   })
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex-row">
+    <div class="flex-row p08">
       <md-field>
         <label for="input">Ajouter une tâche</label>
         <md-input name="input" id="input" :value="text" @input="setText" @keyup.enter="addTask"  />

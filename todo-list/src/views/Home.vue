@@ -5,7 +5,7 @@
     </md-card>
     <div class="elem flex-grow-1 flex-col jcfs">
       <md-card>
-        <Weather />
+        <Weather class="Weather" />
       </md-card>
 
     </div>
@@ -13,6 +13,8 @@
 </template>
 
 <style>
+* {font-family: "Avenir", Helvetica, Arial, sans-serif;}
+
   div.home {
     margin: 0;
     padding: 8px;
@@ -52,7 +54,11 @@
   .flex-grow-8 {flex-grow:8}
   .flex-grow-9 {flex-grow:9}
   .flex-grow-10 {flex-grow:10}
-
+/* superpadding supermargin */
+  .p08 {
+    padding: 0 8px;
+  }
+/* Media queries */
 @media screen and (max-width: 800px) {
   div.home {
     flex-direction: column;
