@@ -24,6 +24,7 @@ client.connect((err)=>{
   app.get('/task', (req,res)=>{
     let tasks = db.collection('tasks')
     let obj = tasks.find({}).toArray((err,tasklist)=>{
+      console.log('[GET] /task')
       res.send(tasklist)
     })
   })
@@ -31,7 +32,7 @@ client.connect((err)=>{
   app.post('/task', (req,res)=>{
     let tasks = db.collection('tasks')
     tasks.insertOne(req.body,()=>{
-      console.log('< insert task',JSON.stringify(req.body))
+      console.log('[POST] /task : ',JSON.stringify(req.body))
       res.send()
     })
   })
@@ -39,14 +40,14 @@ client.connect((err)=>{
   app.put('/delete', (req,res)=>{
     let tasks = db.collection('tasks')
     tasks.deleteOne({_id:new ObjectID(req.body._id)},()=>{
-      console.log('< delete task ',req.body._id)
+      console.log('[PUT] /delete : ',req.body._id)
       res.send()
     })
   })
   app.put('/edit', (req,res)=>{
     let tasks = db.collection('tasks')
     tasks.updateOne({_id:new ObjectID(req.body._id)},{$set:req.body},{upsert:true},()=>{
-      console.log('< '+req.body._id+' now '+req.body.done)
+      console.log('[PUT] /edit : '+req.body._id+' now '+JSON.stringify(req.body))
       res.send() 
     })
   })

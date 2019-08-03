@@ -2,9 +2,9 @@
   <div class="todo flex-col">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <h2>ToDo</h2>
-    <Form class="todo-form" @addTask="insertTask" @refresh="reloadList" />
+    <Form class="todo-form" @addTask="insertTask"/>
     <md-divider></md-divider>
-    <List class="task-list" :list="taskList" @deleteTask="delTask" @toggleCheck="toggleCheck" />
+    <List class="task-list" :list="taskList" @deleteTask="delTask" @toggleCheck="toggleCheck" @refresh="reloadList" />
   </div>
 </template>
 
