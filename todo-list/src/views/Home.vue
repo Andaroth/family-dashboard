@@ -7,7 +7,6 @@
       <md-card>
         <Weather class="Weather" />
       </md-card>
-      <md-card>a</md-card>
     </div>
   </div>
 </template>
