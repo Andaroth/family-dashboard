@@ -13,20 +13,17 @@ app.use(cors())
 const client = new MongoClient(mongoUrl, { useNewUrlParser: true })
 
 client.connect((err)=>{
+  console.log("> Starting ...")
+  assert.equal(null,err)
 
-   assert.equal(null,err)
-   const db = client.db('todo-list')
-   console.log("connected.")
+  const db = client.db('todo-list')
+  console.log("> Connected to "+mongoUrl)
 
-  app.get('/', function (req, res) {
-    res.send('Hello World!')
-  })
-  
+  app.get('/', function (req, res) {res.send()})
   
   app.get('/task', (req,res)=>{
     let tasks = db.collection('tasks')
     let obj = tasks.find({}).toArray((err,tasklist)=>{
-      console.log('get tasklist')
       res.send(tasklist)
     })
   })
@@ -34,7 +31,7 @@ client.connect((err)=>{
   app.post('/task', (req,res)=>{
     let tasks = db.collection('tasks')
     tasks.insertOne(req.body,()=>{
-      console.log('insert task',req.body)
+      console.log('< insert task',JSON.stringify(req.body))
       res.send()
     })
   })
@@ -42,19 +39,19 @@ client.connect((err)=>{
   app.put('/delete', (req,res)=>{
     let tasks = db.collection('tasks')
     tasks.deleteOne({_id:new ObjectID(req.body._id)},()=>{
-      console.log('delete task',req.body._id)
+      console.log('< delete task ',req.body._id)
       res.send()
     })
   })
   app.put('/edit', (req,res)=>{
     let tasks = db.collection('tasks')
     tasks.updateOne({_id:new ObjectID(req.body._id)},{$set:req.body},{upsert:true},()=>{
-      console.log('edit task',req.body)
+      console.log('< '+req.body._id+' now '+req.body.done)
       res.send() 
     })
   })
 
   app.listen(3000, function () {
-    console.log('Running!')
+    console.log('\n>> Up and running!\n')
   })
 })

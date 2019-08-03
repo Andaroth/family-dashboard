@@ -3,11 +3,11 @@
     <md-card class="elem flex-grow-5">
       <Todo class="Todo" />
     </md-card>
-    <div class="elem flex-grow-1 flex-col jcfs">
+    <div class="elem side flex-grow-1 flex-col jcfs">
       <md-card>
         <Weather class="Weather" />
       </md-card>
-
+      <md-card>a</md-card>
     </div>
   </div>
 </template>
@@ -23,6 +23,16 @@
 
   .elem {
     margin: 8px;
+  }
+  .side {
+    overflow-y: auto;
+    max-height: calc(100vh - 32px);
+  }
+  .side > div.md-card {
+    margin-bottom: 16px;
+  }
+  .side > div.md-card:last-child {
+    margin-bottom: 0;
   }
 
   .Todo {
