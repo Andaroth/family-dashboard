@@ -16,7 +16,7 @@
 
 <style>
 .list {
-  max-height: 50vh;
+  height: 100%;
 }
 .li-elem {
   width: 100%;

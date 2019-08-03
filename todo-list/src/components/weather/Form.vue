@@ -16,7 +16,6 @@
 <style>
 .flex-col, .flex-row {
   display: flex;
-  padding: 0 8px;
 }
 .flex-col {
   flex-direction: column;

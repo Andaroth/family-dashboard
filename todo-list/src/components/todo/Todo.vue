@@ -68,10 +68,10 @@ export default {
       const res = await axios.put(ENDPOINT_EDIT,target)
     },
     delTask: async function(id) {
-      const target = this.taskList.find(task => task._id != id)
+      const target = this.taskList.find(task => task._id == id)
       console.log('delTask',target)
       const res = await axios.put(ENDPOINT_DEL,target)
-      this.taskList = this.taskList.filter(task=>task!==target)
+      this.taskList = this.taskList.filter(task=>task._id!=target._id)
     },
     async reloadList() {
       this.taskList = []

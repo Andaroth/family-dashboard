@@ -1,11 +1,14 @@
 <template>
   <div class="home flex-row jcc">
-    <md-card class="elem flex-grow-1">
-      <Weather />
-    </md-card>
     <md-card class="elem flex-grow-5">
-      <Todo />
+      <Todo class="Todo" />
     </md-card>
+    <div class="elem flex-grow-1 flex-col jcfs">
+      <md-card>
+        <Weather />
+      </md-card>
+
+    </div>
   </div>
 </template>
 
@@ -18,6 +21,10 @@
 
   .elem {
     margin: 8px;
+  }
+
+  .Todo {
+    height: calc(100vh - 32px);
   }
 
 /* Text align */
@@ -45,6 +52,15 @@
   .flex-grow-8 {flex-grow:8}
   .flex-grow-9 {flex-grow:9}
   .flex-grow-10 {flex-grow:10}
+
+@media screen and (max-width: 800px) {
+  div.home {
+    flex-direction: column;
+  }
+  .Todo {
+    max-height: 50vh;
+  }
+}
 </style>
 
 <script>
