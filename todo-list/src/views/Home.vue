@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-
-    <div>
-      <Form @addTask="insertTask" @refresh="reloadList" />
-      <List :list="taskList" @deleteTask="delTask" @toggleCheck="toggleCheck" />
-    </div>
-
-
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home flex-col">
+    <img src="../assets/logo.png" alt="Vue logo" width="200" />
+    <Form @addTask="insertTask" @refresh="reloadList" />
+    <List class="task-list" :list="taskList" @deleteTask="delTask" @toggleCheck="toggleCheck" />
   </div>
 </template>
 
 <style>
+img {
+  display: block;
+  margin: 0 auto;
+}
+
+div.home {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: rgb(219, 219, 219);
+}
+div.home > .task-list {
+  overflow-y: auto;
+}
+
 .tac {
   text-align: center;
 }
@@ -31,7 +42,6 @@
 <script>
 import axios from 'axios'
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
 import Form from '@/components/Form.vue';
 import List from '@/components/List.vue';
 import { setTimeout } from 'timers';
@@ -43,7 +53,6 @@ const ENDPOINT_EDIT = "http://localhost:3000/edit"
 export default {
   name: 'home',
   components: {
-    HelloWorld,
     Form,
     List
   },
