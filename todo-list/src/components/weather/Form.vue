@@ -5,7 +5,12 @@
         <label for="input">Chercher une localisation</label>
         <md-input name="input" id="input" :value="text" @input="setText" @keyup.enter="addTask"  />
       </md-field>
-      <md-button class="md-raised md-primary md-icon-button" @click="addTask">Add</md-button>
+      <div class="flex-col jcc">
+        <div>
+          <md-button class="md-raised md-primary md-icon-button md-dense" @click="addTask"><md-icon class="fa fa-plus"></md-icon></md-button>
+          <md-tooltip md-direction="left">Ajouter</md-tooltip>
+        </div>
+      </div>
     </div>
     <div class="flex-row">
       

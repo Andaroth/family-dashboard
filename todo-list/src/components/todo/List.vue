@@ -2,13 +2,18 @@
   <div>
     <md-list class="list">
       <md-list-item class="entry flex-row jcfs" v-for="(i, index) of list" :key="index" @click="toggleCheck(i._id)">
-        <md-checkbox :v-model="i.done" :value="!i.done">
-          <span :class="'name striked-'+i.done">{{i.typedText}}</span>
-        </md-checkbox>
-        <md-button class="md-raised md-accent md-icon-button" @click="deleteEntry(i._id)">delete</md-button>
+        <md-checkbox :v-model="i.done" :value="!i.done" @change="toggleCheck(i._id)"></md-checkbox>
+        <span :class="'name striked-'+i.done">{{i.typedText}}</span>
+        <div>
+          <md-button class="md-icon-button" @click="deleteEntry(i._id)"><md-icon class="fa fa-times"></md-icon></md-button>
+          <md-tooltip md-direction="left">Supprimer</md-tooltip>
+        </div>
       </md-list-item>
     </md-list>
-    <md-button class="refresh-btn md-raised md-icon-button md-dense" @click="reloadList"><md-icon>refresh</md-icon></md-button>
+    <div class="refresh-btn">
+      <md-button class="md-icon-button md-dense" @click="reloadList"><md-icon class="fa fa-rss"></md-icon></md-button>
+      <md-tooltip md-direction="left">Rafraîchir</md-tooltip>
+    </div>
   </div>
 </template>
 
@@ -21,7 +26,7 @@
 }
 .refresh-btn {
   position: absolute !important;
-  left: 8px;
+  right: 8px;
   top: 8px;
 }
 
@@ -75,7 +80,6 @@ export default {
   }),
   methods: {
     deleteEntry: function(id) {
-      console.log('emit delete',id)
       this.$emit('deleteTask',id);
     },
     toggleCheck: function(id) {

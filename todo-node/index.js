@@ -48,11 +48,9 @@ client.connect((err)=>{
   })
   app.put('/edit', (req,res)=>{
     let tasks = db.collection('tasks')
-    tasks.deleteOne({_id:new ObjectID(req.body._id)},()=>{
-      tasks.insertOne(req.body,()=>{
-          console.log('edit task',req.body)
-          res.send()
-      })
+    tasks.updateOne({_id:new ObjectID(req.body._id)},{$set:req.body},{upsert:true},()=>{
+      console.log('edit task',req.body)
+      res.send() 
     })
   })
 

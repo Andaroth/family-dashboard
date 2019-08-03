@@ -1,9 +1,10 @@
 <template>
   <div class="todo flex-col">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <h2>ToDo</h2>
-    <Form class="todo-form" @addTask="insertTask" />
+    <Form class="todo-form" @addTask="insertTask" @refresh="reloadList" />
     <md-divider></md-divider>
-    <List class="task-list" :list="taskList" @deleteTask="delTask" @toggleCheck="toggleCheck" @refresh="reloadList" />
+    <List class="task-list" :list="taskList" @deleteTask="delTask" @toggleCheck="toggleCheck" />
   </div>
 </template>
 
@@ -63,9 +64,7 @@ export default {
     },
     toggleCheck: async function(id) {
       let target = this.taskList.find(task => task._id == id)
-      console.log('will edit from ',target.done.toString())
       target.done = !target.done
-      console.log('to : ',target.done.toString())
       const res = await axios.put(ENDPOINT_EDIT,target)
     },
     delTask: async function(id) {
