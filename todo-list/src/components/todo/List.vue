@@ -5,7 +5,7 @@
         <md-checkbox :v-model="i.done" :value="!i.done" @change="toggleCheck(i._id)"></md-checkbox>
         <span :class="'name striked-'+i.done">{{i.typedText}}</span>
         <div>
-          <md-button class="md-icon-button" @click="deleteEntry(i._id)"><md-icon class="fa fa-times"></md-icon></md-button>
+          <md-button class="md-icon-button" @click.stop="deleteEntry(i._id)"><md-icon class="fa fa-times"></md-icon></md-button>
           <md-tooltip md-direction="left">Supprimer</md-tooltip>
         </div>
       </md-list-item>

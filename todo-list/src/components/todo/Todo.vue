@@ -1,5 +1,6 @@
 <template>
   <div class="todo flex-col">
+    <Spinner class="spinner-component" :active="this.loadingList" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <h2>ToDo</h2>
     <Form class="todo-form" @addTask="insertTask"/>
@@ -23,26 +24,20 @@ div.todo > .task-list {
   overflow-y: auto;
 }
 
-.tac {
-  text-align: center;
-}
-
-.flex-col, .flex-row {
-  display: flex;
-}
-.flex-col {
-  flex-direction: column;
-}
-.flex-row {
-  flex-direction: row;
+.spinner-component {
+  position: relative;
+  top: 50%;
+  z-index: 10;
 }
 </style>
 
 <script>
 import axios from 'axios'
-// @ is an alias to /src
+
 import Form from './Form';
 import List from './List';
+
+import Spinner from '@/components/Spinner';
 
 const ENDPOINT_TASK = "http://localhost:3000/task"
 const ENDPOINT_DEL = "http://localhost:3000/delete"
@@ -52,10 +47,12 @@ export default {
   name: 'todo',
   components: {
     Form,
-    List
+    List,
+    Spinner
   },
   data: ()=>({
-    taskList: []
+    taskList: [],
+    loadingList: false
   }),
   methods: {
     insertTask: async function(typedText) {
@@ -73,9 +70,11 @@ export default {
       this.taskList = this.taskList.filter(task=>task._id!=target._id)
     },
     async reloadList() {
+      this.loadingList = true
       this.taskList = []
       const { data } = await axios.get(ENDPOINT_TASK)
       this.taskList = data
+      this.loadingList = false
       console.log(this.taskList)
     }
   },
