@@ -45,11 +45,16 @@ client.connect((err)=>{
     })
   })
   app.put('/edit', (req,res)=>{
+    const _id = new ObjectID(req.body._id)
+    delete req.body._id
     let tasks = db.collection('tasks')
-    tasks.updateOne({_id:new ObjectID(req.body._id)},{$set:req.body},{upsert:true},()=>{
-      console.log('[PUT] /edit : '+req.body._id+' now '+JSON.stringify(req.body))
-      res.send() 
-    })
+    tasks.updateOne(
+        {_id},
+        {$set:req.body},
+        {upsert:true}).then(()=>{
+            console.log('[PUT] /edit : '+_id+' now '+JSON.stringify(req.body))
+            res.send() 
+        })
   })
 
   app.listen(3000, function () {
