@@ -5,7 +5,12 @@
     <h2>ToDo</h2>
     <Form class="todo-form" @addTask="insertTask"/>
     <md-divider></md-divider>
-    <List class="task-list" :list="taskList" @deleteTask="delTask" @toggleCheck="toggleCheck" @refresh="reloadList" />
+    <List class="task-list" :list="taskList" 
+      @deleteTask="delTask" 
+      @toggleCheck="toggleCheck" 
+      @editEntry="editTask"
+      @refresh="reloadList" 
+    />
   </div>
 </template>
 
@@ -39,9 +44,7 @@ import List from './List';
 
 import Spinner from '@/components/Spinner';
 
-const ENDPOINT_TASK = "http://localhost:3000/task"
-const ENDPOINT_DEL = "http://localhost:3000/delete"
-const ENDPOINT_EDIT = "http://localhost:3000/edit"
+const SERVER_ADDRESS = "http://localhost:3000"
 
 export default {
   name: 'todo',
@@ -56,23 +59,28 @@ export default {
   }),
   methods: {
     insertTask: async function(typedText) {
-        const res = await axios.post(ENDPOINT_TASK,{typedText,done:false})
+        const res = await axios.post(SERVER_ADDRESS+'/task',{typedText,done:false})
         this.reloadList()
     },
     toggleCheck: async function(id) {
       let target = this.taskList.find(task => task._id == id)
       target.done = !target.done
-      const res = await axios.put(ENDPOINT_EDIT,target)
+      const res = await axios.put(SERVER_ADDRESS+'/edit',target)
+    },
+    editTask: async function(id,newText) {
+      let target = this.taskList.find(task => task._id == id)
+      target.typedText = newText;
+      const res = await axios.put(SERVER_ADDRESS+'/edit',target)
     },
     delTask: async function(id) {
       const target = this.taskList.find(task => task._id == id)
-      const res = await axios.put(ENDPOINT_DEL,target)
+      const res = await axios.put(SERVER_ADDRESS+'/delete',target)
       this.taskList = this.taskList.filter(task=>task._id!=target._id)
     },
     async reloadList() {
       this.loadingList = true
       this.taskList = []
-      const { data } = await axios.get(ENDPOINT_TASK)
+      const { data } = await axios.get(SERVER_ADDRESS+'/task')
       this.taskList = data
       this.loadingList = false
       console.log(this.taskList)

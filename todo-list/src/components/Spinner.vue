@@ -12,7 +12,7 @@
   .spinner-container {
     animation: beat 1s infinite;
     position: absolute;
-    transition: transform ease-in-out 1s;
+    transition: transform ease-in-out 1s opacity .2s;
     pointer-events: none;
     opacity: 0;
     font-size: 64px;
