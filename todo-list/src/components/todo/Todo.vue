@@ -3,7 +3,7 @@
     <Spinner class="spinner-component" :active="this.loadingList" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <h2>ToDo</h2>
-    <Form class="todo-form" @addTask="insertTask"/>
+    <SimpleForm label="Ajouter une tâche" confirm="Ajouter" class="todo-form" @send="insertTask"/>
     <md-divider></md-divider>
     <List class="task-list" :list="taskList" 
       @deleteTask="delTask" 
@@ -39,7 +39,7 @@ div.todo > .task-list {
 <script>
 import axios from 'axios'
 
-import Form from './Form';
+import SimpleForm from '../SimpleForm';
 import List from './List';
 
 import Spinner from '@/components/Spinner';
@@ -49,7 +49,7 @@ const SERVER_ADDRESS = "http://localhost:3000"
 export default {
   name: 'todo',
   components: {
-    Form,
+    SimpleForm,
     List,
     Spinner
   },
@@ -83,7 +83,6 @@ export default {
       const { data } = await axios.get(SERVER_ADDRESS+'/task')
       this.taskList = data
       this.loadingList = false
-      console.log(this.taskList)
     }
   },
   async mounted() {

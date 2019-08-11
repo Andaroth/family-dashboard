@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>Météo</h2>
-        <Form />
+        <SimpleForm label="Chercher une localisation" confirm="Ajouter" />
         <md-divider></md-divider>
         <Map />
         <md-divider></md-divider>
@@ -11,15 +11,15 @@
 <script>
 import axios from 'axios'
 
-import Form from './Form';
-import Map from './Map';
+import SimpleForm from '../SimpleForm';
+import Mapbox from './Mapbox';
 import 'vue-material/dist/theme/default-dark.css'
 
 export default {
     name: 'weather',
     components: {
-        Form,
-        Map
+        SimpleForm,
+        Mapbox
     }
 }
 </script>

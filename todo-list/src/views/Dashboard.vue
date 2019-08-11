@@ -1,11 +1,16 @@
 <template>
   <div class="home flex-row jcc">
-    <md-card class="elem flex-grow-5">
-      <Todo class="Todo" />
-    </md-card>
-    <div class="elem side flex-grow-1 flex-col jcfs">
-      <md-card>
+    <div class="flex-col flex-grow-1">
+      <md-card class="elem">
+        <Todo class="Todo" />
+      </md-card>
+      <md-card class="elem">
         <Weather class="Weather" />
+      </md-card>
+    </div>
+    <div class="flex-col flex-grow-4 flex-col">
+      <md-card class="elem elem-calendar">
+        <Calendar class="Calendar" />
       </md-card>
     </div>
   </div>
@@ -23,18 +28,12 @@
   .elem {
     margin: 8px;
   }
-  .side {
-    overflow-y: auto;
-    max-height: calc(100vh - 32px);
-  }
-  .side > div.md-card {
-    margin-bottom: 16px;
-  }
-  .side > div.md-card:last-child {
-    margin-bottom: 0;
+
+  .Todo, .Weather {
+    height: calc(50vh - 32px);
   }
 
-  .Todo {
+  .elem-calendar {
     height: calc(100vh - 32px);
   }
 
@@ -81,12 +80,14 @@
 <script>
 import Todo from '@/components/todo/Todo'
 import Weather from '@/components/weather/Weather'
+import Calendar from '@/components/calendar/Calendar'
 
 export default {
-  name: 'home',
+  name: 'dashboard',
   components: {
     Todo,
-    Weather
+    Weather,
+    Calendar
   }
 };
 </script>

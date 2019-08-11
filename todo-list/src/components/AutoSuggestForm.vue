@@ -2,13 +2,13 @@
   <div>
     <div class="flex-row p08">
       <md-field>
-        <label for="input">Ajouter une tâche</label>
+        <label for="input">{{ label || 'Please use "label" property'}}</label>
         <md-input name="input" id="input" :value="text" @input="setText" @keyup.enter="addTask"  />
       </md-field>
       <div class="flex-col jcc">
         <div>
           <md-button class="md-raised md-primary md-icon-button md-dense" @click="addTask"><md-icon class="fa fa-plus"></md-icon></md-button>
-          <md-tooltip md-direction="left">Ajouter</md-tooltip>
+          <md-tooltip md-direction="left">{{ confirm || "valider" }}</md-tooltip>
         </div>
       </div>
     </div>
@@ -33,7 +33,11 @@
 
 <script>
 export default {
-  name: 'Form',
+  name: 'AutoSuggestForm',
+  props: {
+    label: String,
+    confirm: String,
+  },
   data: () => ({
     text: '',
   }),
@@ -43,7 +47,7 @@ export default {
     },
     addTask: function() {
       if (this.text.length) {
-        this.$emit('addTask',this.text);
+        this.$emit('send',this.text);
         this.text = ''
       }
     }

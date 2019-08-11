@@ -1,9 +1,21 @@
 <template>
   <div>
     <md-list class="list">
-      <md-list-item class="entry flex-row jcfs tal" v-for="(i, index) of list" :key="index" @click="toggleCheck(i._id)">
+      <md-list-item 
+        class="entry flex-row jcfs tal" 
+        v-for="(i, index) of list" 
+        :key="index" 
+        @click="toggleCheck(i._id)"
+        @keyup.32.stop=""
+      >
         <md-checkbox :v-model="i.done" :value="!i.done" @change="toggleCheck(i._id)"></md-checkbox>
-        <input :id="i._id" :class="'name striked-'+i.done" @click.stop="" @keyup.stop="editTask" :value="i.typedText" :disabled="i.done" />
+        <input 
+          :id="i._id" 
+          :class="'name striked-'+i.done" 
+          :value="i.typedText" :disabled="i.done"
+          @click.stop="" 
+          @keyup.stop="editTask" 
+        />
         <div>
           <md-button class="md-icon-button" @click.stop="deleteTask(i._id)"><md-icon class="fa fa-times"></md-icon></md-button>
           <md-tooltip md-direction="left">Supprimer</md-tooltip>
@@ -41,6 +53,7 @@
   border: 0;
   box-sizing: border-box;
   transition: all .5s;
+  text-overflow: ellipsis;
 }
 .name:disabled {
   background: transparent;

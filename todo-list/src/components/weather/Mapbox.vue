@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="map" class="map"></div>
+        <div id="mapbox" ref="mapbox" class="mapbox"></div>
     </div>
 </template>
 
@@ -18,10 +18,10 @@ var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kYXJvdGgiLCJhIjoiY2p5eW5vMWZiMDRuZjNibXJndWcycXFobiJ9.26qYwngCmL_1HVGT3b3CLg';
 
 export default {
-    name: 'map',
+    name: 'mapbox',
     async mounted() {
         var map = new mapboxgl.Map({
-            container: 'map',
+            container: 'mapbox',
             style: 'mapbox://styles/mapbox/streets-v11'
         });
     }
