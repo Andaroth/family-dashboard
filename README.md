@@ -12,14 +12,14 @@ Go to the project's root and do the following commands in this order :
 
 In one terminal (back-end NodeJS) : 
 ```
-cd /todo-node
+cd todo-node
 npm install
 node index.js
 ```
 
 In another one (front-end VueJS) : 
 ```
-cd /todo-list
+cd todo-list
 npm install
 npm run serve
 ```
